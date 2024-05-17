@@ -77,7 +77,8 @@ export const getUsers = query({
 		}
 
 		const users = await ctx.db.query("users").collect();
-		return users.filter((user) => user.tokenIdentifier !== identity.tokenIdentifier);
+		// Query to get users, excluding the logged-in user from the list for group creation.
+        return users.filter((user) => user.tokenIdentifier !== identity.tokenIdentifier);
 	},
 });
 
